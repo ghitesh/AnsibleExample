@@ -1,0 +1,32 @@
+-
+  name: install epel-release, for intsalling python-pip next.
+  yum: name=epel-release state=installed
+  become: yes
+
+-
+  name: python-pip this package is required to use the pip module
+  yum:
+    name: python-pip
+    state: present
+  become: yes
+
+-
+  name: "Insall PyMySQL, which is required for subsequent steps"
+  pip:
+      name: PyMySQL
+  become: yes
+
+- name: Create a new database with name 'ecomdb'
+  mysql_db:
+    name: ecomdb
+    state: present
+    login_user: root
+
+- name: Create database user with name 'ecomuser' with all database privileges
+  mysql_user:
+    name: ecomuser
+    password: "{{ MYSQL_USER_PASSWORD_DECRYPTED }}"
+    priv: '*.*:ALL'
+    state: present
+    login_user: root
+  no_log: false

@@ -1,0 +1,16 @@
+---
+-
+  name: Playbook to check vault
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    include_vars: /home/vagrant/Vault.yml
+    gat_value: "{{ MYSQL_USER_PASSWORD }}"
+
+  tasks:
+    - include_vars: /home/vagrant/Vault.yml
+
+    - name: Show gat_value
+      debug:
+        var: gat_value

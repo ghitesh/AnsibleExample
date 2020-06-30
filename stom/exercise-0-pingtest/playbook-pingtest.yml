@@ -1,0 +1,7 @@
+-
+  name: Check connectivity
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: ping test
+      ping:

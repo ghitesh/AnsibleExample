@@ -1,0 +1,27 @@
+---
+-
+  name: "Playbook to deploy the website"
+  hosts: target1
+  gather_facts: no
+  ignore_errors: True
+
+  tasks:
+    -
+      name: Install firewalld
+      yum: name=firewalld state=installed
+
+    -
+      name: Start firewalld
+      service: name=firewalld state=started
+      #become: yes
+
+    -
+      name: Enable firewalld
+      service: name=firewalld enabled=yes
+      become: yes
+
+    - import_role:
+        name: mysql
+
+    - import_role:
+        name: web

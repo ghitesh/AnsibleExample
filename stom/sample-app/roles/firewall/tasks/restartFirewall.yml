@@ -1,0 +1,4 @@
+-
+  name: Restart Firewall
+  command: "firewall-cmd --reload"
+  become: yes

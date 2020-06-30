@@ -1,0 +1,12 @@
+- name: Include secret vaiables
+  include_vars: /home/vagrant/Vault.yml
+  
+- name: "Call Install DB playbook"
+  import_tasks: db.yml
+
+- name: Configure DB
+  import_tasks: configureDB.yml
+
+- name: Configure schema
+  import_tasks: installSchema.yml
+  when:  MIGRATE_DB == 'Y'

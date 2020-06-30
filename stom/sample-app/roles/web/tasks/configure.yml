@@ -1,0 +1,21 @@
+-
+  name: Update httpd.conf to use index.php
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: 'DirectoryIndex'
+    line: DirectoryIndex index.php
+  become: yes
+
+-
+  name: Start httpd
+  service:
+    name: httpd
+    state: started
+  become: yes
+
+-
+  name: Enable https service
+  service:
+    name: httpd
+    enabled: yes
+  become: yes

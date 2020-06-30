@@ -1,0 +1,28 @@
+-
+  name: Install httpd
+  yum:
+    name: httpd
+    state: installed
+  become: yes
+
+-
+  name: Install php
+  yum:
+    name: php
+    state: installed
+  become: yes
+
+-
+  name: Install php-mysql
+  yum:
+    name: php-mysql
+    state: installed
+  become: yes
+
+-
+  name: Configure firewall
+  command: "firewall-cmd --permanent --zone=public --add-port=80/tcp"
+  become: yes
+
+-
+  import_tasks: ../../firewall/tasks/restartFirewall.yml

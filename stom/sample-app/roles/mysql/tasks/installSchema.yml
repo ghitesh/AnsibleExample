@@ -1,0 +1,17 @@
+- name: Copy db file to remote hosts
+  copy:
+    src: db-load-script.sql
+    dest: /home/vagrant
+
+- name: Run execute the file
+  mysql_db:
+    name: ecomdb
+    login_password: "{{ MYSQL_USER_PASSWORD_DECRYPTED }}"
+    login_user: ecomuser
+    target: /home/vagrant/db-load-script.sql
+    state: import
+
+- name: Remove db file
+  file:
+    path: /home/vagrant/db-load-script.sql
+    state: absent

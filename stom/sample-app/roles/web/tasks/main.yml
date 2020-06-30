@@ -1,0 +1,8 @@
+- name: Deploy services
+  include_tasks: deploy.yml
+
+- name: Configure httpd
+  include_tasks: configure.yml
+
+- name: Get and deploy Code
+  include_tasks: codebase.yml

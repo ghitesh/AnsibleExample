@@ -1,0 +1,14 @@
+-
+  name: Copy files
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Copy file
+      copy:
+        src: /home/vagrant/common/Hello.txt
+        dest: /home/vagrant/Hello.txt
+
+    - name: delete these
+      file:
+        path: /home/vagrant/Hello.txt
+        state: absent

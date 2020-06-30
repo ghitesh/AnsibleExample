@@ -1,0 +1,24 @@
+-
+  name: install git
+  yum:
+    name: git
+    state: installed
+  become: yes
+
+-
+  name: import the secrtes files
+  include_vars: /home/vagrant/Vault.yml
+-
+  name: Checkout code
+  git:
+    repo: 'https://github.com/kodekloudhub/learning-app-ecommerce.git'
+    dest: /var/www/html/
+  become: yes
+
+-
+  name: Setting the correct db connection string
+  lineinfile:
+    line: "$link = mysqli_connect('localhost', 'ecomuser', '{{ MYSQL_USER_PASSWORD }}', 'ecomdb');"
+    regexp: "link = mysqli_connect"
+    path: /var/www/html/index.php
+  become: yes

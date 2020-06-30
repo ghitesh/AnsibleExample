@@ -1,0 +1,23 @@
+- name: Install DB
+  yum:
+    name: mariadb-server
+    state: installed
+  become: yes
+
+-
+  name: Start mariadb
+  service: name=mariadb state=started
+  become: yes
+
+-
+  name: Enable mariadb
+  service: name=mariadb enabled=yes
+  become: yes
+
+-
+  name: Configure firewall
+  command: "firewall-cmd --permanent --zone=public --add-port=3306/tcp"
+  become: yes
+
+-
+  import_tasks: ../../firewall/tasks/restartFirewall.yml
